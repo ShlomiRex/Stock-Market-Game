@@ -1,10 +1,10 @@
-package core;
+package main.init;
 
-import main.game.PlayerProfile;
+import core.Company;
+import main.game.Companies_Stock_Change_Window;
+import main.init.PlayerProfile;
 
 import java.text.DecimalFormat;
-import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
@@ -26,6 +26,8 @@ public class Global {
      * Array of size 10. Represent origional resource data.
      */
     public static int[] src_big_stocks_frequencies;
-    public static DecimalFormat stock_change_format;
+    public static DecimalFormat format_stock_change;
+    public static DecimalFormat format_company_net_worth;
+    public static Companies_Stock_Change_Window stock_change_window_gui;
 
 }

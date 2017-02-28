@@ -1,11 +1,17 @@
 package core;
 
+import main.game.StockMarket;
+import main.init.Global;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Company {
     public String name;
     public double share_price;
     public final int id;
-    private double stock_presentage_growth;
-    public double net_worth;
+    public double stock_presentage_growth;
+    private double net_worth;
 
     public Company(String name, int net_worth,int share_price, int id) {
         this.name = name;
@@ -19,9 +25,24 @@ public class Company {
      * Every game update, update the stock values n stuff
      */
     public void update() {
-        stock_presentage_growth = HelpFunctionsAndAlgorithms.getRandomStockChange();
-        //System.out.println("Company value: [" + net_worth + "] Stock change: [" + stock_presentage_growth + "]");
+        stock_presentage_growth = StockMarket.getRandomStockChange();
+        //System.out.println("Company [name,value,change]:     [" +name +","+net_worth+","+ stock_presentage_growth + "]");
         net_worth += net_worth * (stock_presentage_growth/100.0);
         //System.out.print("New company value: [" + net_worth + "]\n");
+
+        updateTable();
+    }
+
+    /**
+     * Update the JTable that shows the user the company
+     */
+    private void updateTable() {
+        Global.stock_change_window_gui.updateCompanyAtTable(this);
+    }
+
+    public String getNet_worth_string() {
+        //return Double.parseDouble(Global.format_company_net_worth.format(net_worth));
+
+        return NumberFormat.getNumberInstance(Locale.US).format(net_worth);
     }
 }

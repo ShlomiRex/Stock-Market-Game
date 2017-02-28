@@ -4,17 +4,14 @@ package main.game;
  * Created by Shlomi on 26/02/2017.
  */
 import core.Company;
-import core.Global;
-import core.HelpFunctionsAndAlgorithms;
-import main.init.Resource_Factory;
+import main.init.Global;
+import main.init.LoadGame;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Game implements Runnable{
 
-    public boolean running = false;
+    public static boolean running = false;
 
 
 
@@ -23,7 +20,7 @@ public class Game implements Runnable{
         running = true;
         try {
             //Here we load ALL the resources, put in memory stuff, initalizing everything that the game needs to work.
-            new Resource_Factory();
+            new LoadGame();
         } catch (IOException e) {
             e.printStackTrace();
             running = false;
