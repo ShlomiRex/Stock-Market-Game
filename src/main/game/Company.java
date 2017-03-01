@@ -1,15 +1,14 @@
-package core;
+package main.game;
 
-import main.game.StockMarket;
 import main.init.Global;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Company {
+    public final int id;
     public String name;
     public double share_price;
-    public final int id;
     public double stock_presentage_growth;
     private double net_worth;
 
@@ -37,7 +36,7 @@ public class Company {
      * Update the JTable that shows the user the company
      */
     private void updateTable() {
-        Global.stock_change_window_gui.updateCompanyAtTable(this);
+        Global.companies_table.updateCompanyAtTable(this);
     }
 
     public String getNet_worth_string() {

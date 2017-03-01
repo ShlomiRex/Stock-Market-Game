@@ -3,15 +3,14 @@ package main.game;
 /**
  * Created by Shlomi on 26/02/2017.
  */
-import core.Company;
 import main.init.Global;
 import main.init.LoadGame;
 
 import java.io.IOException;
 
-public class Game implements Runnable{
+public final class Game implements Runnable {
 
-    public static boolean running = false;
+    public static boolean running;
 
 
 
@@ -21,6 +20,7 @@ public class Game implements Runnable{
         try {
             //Here we load ALL the resources, put in memory stuff, initalizing everything that the game needs to work.
             new LoadGame();
+            //new MainWindow();
         } catch (IOException e) {
             e.printStackTrace();
             running = false;
