@@ -20,8 +20,12 @@ public class NewsEffect {
         impact_value = impact;
     }
 
+    /**
+     * @param company
+     * @return ARRAY OF SIZE 2
+     */
     public String[] getNewsDescription_AdCampaign(Company company) {
-        String[] d = new String[3];
+        String[] d = new String[2];
         d[0] = "Company " + company.name + " realised the profit potential" +
                 " in advertising at " + getRandomAdLocation() + " .";
         d[1] = "News impact: " + impact_value.string;
@@ -37,6 +41,7 @@ public class NewsEffect {
      *
      * @return
      */
+    //TODO: Do something about news feed and duration and cons and pros of news
     private int getRandomAdEffectDuration() {
         //Small
         if (impact_value == NewsImpact.Small) {

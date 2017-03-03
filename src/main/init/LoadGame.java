@@ -1,9 +1,12 @@
 package main.init;
 
 import main.game.Company;
+import main.game.Game;
+import main.game.news.NewsFeed_Frame;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Properties;
 
@@ -18,21 +21,40 @@ public final class LoadGame {
     public LoadGame() throws IOException {
         prop = new Properties();
 
-
-        //Try to read from resources
+        loadGameSettings();
+        initCompanies();
         loadCompanies();
         loadStockChangeCharts();
         loadNewsSettings();
+        initNews();
+    }
+
+    private void loadGameSettings() throws IOException {
+
+        prop.load(getClass().getResourceAsStream("/game_settings.properties"));
+
+        double amount;
+        amount = Double.parseDouble(prop.getProperty("update_after"));
+        BigDecimal bigDecimal = new BigDecimal("" + 1000000000L * amount);
+        Game.update_after = bigDecimal.longValue();
+
+        prop.clear();
+    }
+
+    private void initNews() {
+        new NewsFeed_Frame();
+    }
+
+    private void initCompanies() {
+        Global.companies.add(0, new Company("Shlomi", 1000, 100, 0));
+        Global.companies.add(0, new Company("Shlomi 2", 1000, 100, 1));
+        Global.companies.add(0, new Company("Shlomi 3", 1000, 100, 2));
+        Global.companies.add(0, new Company("Shlomi 4", 1000, 100, 3));
     }
 
     private void loadCompanies() {
-        Global.companies.add(0, new Company("Shlomi", 1, 100, 0));
-        Global.companies.add(0, new Company("Shlomi 2", 1, 100, 1));
-        Global.companies.add(0, new Company("Shlomi 3", 1, 100, 2));
-        Global.companies.add(0, new Company("Shlomi 4", 1, 100, 3));
-
         for (Company c : Global.companies)
-            Global.companies_table.addCompany(new String[]{"" + c.id, c.name, "" + 0, "" + c.getNet_worth_string()});
+            Global.companies_table_frame.addCompany(new String[]{"" + c.id, c.name, "" + 0, "" + c.getNet_worth_string()});
     }
 
     private void loadNewsSettings() throws IOException {
@@ -50,9 +72,9 @@ public final class LoadGame {
                 .split(",")).stream().mapToInt(Integer::parseInt).toArray();
 
         /* DURATION EFFECT */
-        Global.News_Effect_Duration_AdCampaign_Range_Short = array1;
-        Global.News_Effect_Duration_AdCampaign_Range_Ok = array2;
-        Global.News_Effect_Duration_AdCampaign_Range_Long = array3;
+        Global.news_Effect_Duration_AdCampaign_Range_Short = array1;
+        Global.news_Effect_Duration_AdCampaign_Range_Ok = array2;
+        Global.news_Effect_Duration_AdCampaign_Range_Long = array3;
 
 
 
@@ -68,9 +90,17 @@ public final class LoadGame {
                 .split(",")).stream().mapToInt(Integer::parseInt).toArray();
 
         /* STOCK % GROWTH */
-        Global.News_Effect_StockPresentageGrowth_AdCampaign_Range_Small = array1;
-        Global.News_Effect_StockPresentageGrowth_AdCampaign_Range_Moderate = array2;
-        Global.News_Effect_StockPresentageGrowth_AdCampaign_Range_Big = array3;
+        Global.news_Effect_StockPresentageGrowth_AdCampaign_Range_Small = array1;
+        Global.news_Effect_StockPresentageGrowth_AdCampaign_Range_Moderate = array2;
+        Global.news_Effect_StockPresentageGrowth_AdCampaign_Range_Big = array3;
+
+
+        //Load next news interval range
+        array1 = Arrays.asList(prop.getProperty("next_news_reset_timer_range")
+                .split(",")).stream().mapToInt(Integer::parseInt).toArray();
+        Global.news_Reset_Interval_Range = array1;
+
+        prop.clear();
     }
 
     /**
