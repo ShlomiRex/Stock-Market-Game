@@ -2,8 +2,7 @@ package main.init;
 
 import main.game.Company;
 import main.game.news.News;
-import main.gui_components.Companies_Table_Frame;
-import main.gui_components.chart.Chart;
+import main.gui_components.companies_table.Companies_Table;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ final public class Global {
      */
     public static int[] src_big_stocks_frequencies = new int[10];
     public static DecimalFormat format_stock_change = new DecimalFormat("#.#");
-    public static Companies_Table_Frame companies_table_frame = new Companies_Table_Frame();
+    public static Companies_Table companies_table_frame = new Companies_Table();
 
     /* @@@@@@@@@@@@@@@@@@@@@@@ AD CAMPAIGN @@@@@@@@@@@@@@@@@@@@@@@ */
 
@@ -51,7 +50,7 @@ final public class Global {
     /* NEXT NEWS INTERVAL */
     public static int[] news_Reset_Interval_Range = new int[2];
 
-    public static Chart chart;
+    //public static Chart chart;
 
     public static News news;
 }

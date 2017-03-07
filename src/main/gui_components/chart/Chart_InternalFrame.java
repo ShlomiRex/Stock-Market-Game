@@ -16,6 +16,8 @@ public class Chart_InternalFrame extends JInternalFrame {
 
         chart = new Chart();
 
+        Chart3 chart3 = new Chart3();
+
         add(chart.chartPanel);
 
         this.setVisible(true);

@@ -54,7 +54,7 @@ public final class LoadGame {
 
     private void loadCompanies() {
         for (Company c : Global.companies)
-            Global.companies_table_frame.addCompany(new String[]{"" + c.id, c.name, "" + 0, "" + c.getNet_worth_string()});
+            Global.companies_table_frame.addCompany(c);
     }
 
     private void loadNewsSettings() throws IOException {
